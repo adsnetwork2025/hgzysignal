@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wingo Signal Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        input { padding: 10px; font-size: 16px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        .signal { margin-top: 20px; font-size: 24px; font-weight: bold; }
+        .signal.green { color: green; }
+        .signal.red { color: red; }
+        .signal.violet { color: violet; }
+    </style>
+</head>
+<body>
+    <h1>Wingo Signal Generator</h1>
+    <input type="number" id="periodId" placeholder="Enter Period Number">
+    <button onclick="generateSignal()">Get Signal</button>
+    <div id="signal" class="signal"></div>
+
+    <script>
+        function generateSignal() {
+            const periodId = document.getElementById('periodId').value;
+            let signal = '';
+            
+            if (!periodId) {
+                document.getElementById('signal').innerHTML = 'Please enter a valid Period Number.';
+                return;
+            }
+
+            // Simple logic for demo, you can expand this logic
+            if (periodId % 3 === 0) {
+                signal = '<span class="signal green">Green - Odd Number</span>';
+            } else if (periodId % 3 === 1) {
+                signal = '<span class="signal red">Red - Even Number</span>';
+            } else {
+                signal = '<span class="signal violet">Violet - Rare Double</span>';
+            }
+            
+            document.getElementById('signal').innerHTML = signal;
+        }
+    </script>
+</body>
+</html>
