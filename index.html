@@ -1,46 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wingo Signal Generator</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        input { padding: 10px; font-size: 16px; }
-        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
-        .signal { margin-top: 20px; font-size: 24px; font-weight: bold; }
-        .signal.green { color: green; }
-        .signal.red { color: red; }
-        .signal.violet { color: violet; }
-    </style>
+  <meta charset="UTF-8">
+  <title>Wi-Fi Hack</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: monospace;
+      padding: 20px;
+    }
+    input, button {
+      margin: 10px 0;
+      padding: 8px;
+      width: 100%;
+    }
+    #output {
+      white-space: pre-line;
+      background: #111;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #0f0;
+    }
+  </style>
 </head>
 <body>
-    <h1>Wingo Signal Generator</h1>
-    <input type="number" id="periodId" placeholder="Enter Period Number">
-    <button onclick="generateSignal()">Get Signal</button>
-    <div id="signal" class="signal"></div>
 
-    <script>
-        function generateSignal() {
-            const periodId = document.getElementById('periodId').value;
-            let signal = '';
-            
-            if (!periodId) {
-                document.getElementById('signal').innerHTML = 'Please enter a valid Period Number.';
-                return;
-            }
+  <h2>Wi-Fi Hack</h2>
 
-            // Simple logic for demo, you can expand this logic
-            if (periodId % 3 === 0) {
-                signal = '<span class="signal green">Green - Odd Number</span>';
-            } else if (periodId % 3 === 1) {
-                signal = '<span class="signal red">Red - Even Number</span>';
-            } else {
-                signal = '<span class="signal violet">Violet - Rare Double</span>';
-            }
-            
-            document.getElementById('signal').innerHTML = signal;
-        }
-    </script>
+  <label>Wi-Fi নাম:</label>
+  <input type="text" id="wifiName" placeholder="Enter Wi-Fi name">
+
+  <label>IP Address:</label>
+  <input type="text" id="ipAddress" placeholder="Enter IP address">
+
+  <button onclick="startHack()">সাবমিট</button>
+
+  <div id="output"></div>
+
+  <script>
+    // প্রি-সেট Wi-Fi নাম ও পাসওয়ার্ড
+    const passwords = {
+      "Hridoy Khan": "hridoy2030",
+      "Araf": "20252026",
+      "Monir Boos": "Monir@Hossain"
+    };
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function startHack() {
+      const wifi = document.getElementById("wifiName").value.trim();
+      const ip = document.getElementById("ipAddress").value.trim();
+      const output = document.getElementById("output");
+      output.innerText = "";
+
+      if (!wifi || !ip) {
+        output.innerText = "⚠️ অনুগ্রহ করে Wi-Fi নাম ও IP অ্যাড্রেস লিখুন!";
+        return;
+      }
+
+      let fakeLogs = [
+        `Connecting to ${ip}...`,
+        "Initializing packet sniffing...",
+        "Cracking handshake...",
+        "Injecting reverse shell...",
+        "Extracting password hash...",
+        "Decrypting..."
+      ];
+
+      for (let log of fakeLogs) {
+        output.innerText += log + "\n";
+        await sleep(800);
+      }
+
+      await sleep(1000);
+
+      let pass = passwords[wifi] || "❌ পাসওয়ার্ড পাওয়া যায়নি!";
+      output.innerText += `\n📡 Wi-Fi: ${wifi}\n🔑 Password: ${pass}`;
+    }
+  </script>
+
 </body>
 </html>
